@@ -30,3 +30,37 @@ app.get('/', (req, res) =>{
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
+
+
+
+app.post('/api/notes', (req, res) => {
+    function createNewNotes(body, notesArray) {
+        const newNote = body;
+    
+    
+      
+        if (displayNotes.length == 0){
+            req.body.id = "0";
+        } else{
+            req.body.id = JSON.stringify(JSON.parse(displayNotes[displayNotes.length -1].id) + 1);
+        }
+        
+     
+        notesArray.push(newNote);
+        fs.writeFileSync(
+            path.join(__dirname, './db/db.json'),
+            JSON.stringify(notesArray,null,1),
+            function (err) {
+    
+                if (err) {
+                    return console.log(err);
+                }
+             });
+        console.log("Your note was saved!");
+        return newNote;
+            };
+    
+      
+    const newNote = createNewNotes(req.body, displayNotes);
+    res.json(newNote);
+    });
