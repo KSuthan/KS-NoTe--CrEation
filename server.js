@@ -15,3 +15,18 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use public folder
 app.use(express.static('public'));
+
+// GET Method to display all notes
+app.get('/api/notes', (req, res) => {
+    res.json(displayNotes);
+});
+
+// when page load, it will start with index.html
+app.get('/', (req, res) =>{
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// Notes html page
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
