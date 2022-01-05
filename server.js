@@ -32,20 +32,20 @@ app.get('/notes', (req, res) => {
 });
 
 
-
+ // POST Method to create new notes
 app.post('/api/notes', (req, res) => {
     function createNewNotes(body, notesArray) {
         const newNote = body;
     
     
-      
+       // This assigns an ID to the newNote. 
         if (displayNotes.length == 0){
             req.body.id = "0";
         } else{
             req.body.id = JSON.stringify(JSON.parse(displayNotes[displayNotes.length -1].id) + 1);
         }
         
-     
+        // Write the db.json file
         notesArray.push(newNote);
         fs.writeFileSync(
             path.join(__dirname, './db/db.json'),
@@ -65,7 +65,9 @@ app.post('/api/notes', (req, res) => {
     res.json(newNote);
     });
 
-    function deleteNote(id, notesArray) {
+
+ // Delete a note based on an ID
+ function deleteNote(id, notesArray) {
         for (let i = 0; i < notesArray.length; i++) {
             let note = notesArray[i];
     
@@ -82,12 +84,14 @@ app.post('/api/notes', (req, res) => {
         }
     }
 
-    app.delete('/api/notes/:id', (req, res) => {
-        deleteNote(req.params.id, displayNotes);
+ app.delete('/api/notes/:id', (req, res) => {
+     deleteNote(req.params.id, displayNotes);
         res.json(true);
     });
     
 
-    app.listen(PORT, () => {
-        console.log(`API server now on port ${PORT}!`);
+// Listening is the last thing in Express. This sets up the server.
+app.listen(PORT, () => {
+     console.log(`API server now on port ${PORT}!`);
     });
+    
