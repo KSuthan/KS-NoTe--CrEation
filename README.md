@@ -30,7 +30,7 @@
 
   Deployed video link : https://watch.screencastify.com/v/EOqlGI6xAdx4ttk8m0YF
 
-  Deployed Heroku link : https://git.heroku.com/ks-note.git
+  Deployed Heroku link : https://ks-note.herokuapp.com/
 
   Sample pic 
   ![note11](https://user-images.githubusercontent.com/91926452/148258935-dca421fa-1879-4a0f-9da4-4180869558e9.JPG)
